@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMHSS-AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav id="navbar" class="nav">
+        <div class="logo">
+            <a href="/"> MM<span>HSS</span></a>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/sign-in" id="main">Get Start</a></li> 
+    
+            </ul>
+         
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="main-text">
+                        <h1>Quality - Learning <br> <span>For Every Children</span></h1>
+                        <p>We are Building To EveryOne With Our Ai .</p>
+                        <button class="main">Get Start</button>
+                    </div>
+                
+                </div>
+                <div class="col-md-6">
+                    <img src="https://img.freepik.com/free-psd/3d-nft-icon-digital-artist-male_629802-8.jpg" class="img-fluid" alt="Don't Give Up">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="main-text">
+                    <h1 class="section-title">About</h1>
+                    <h2 class="section-subtitle">We Are Making Our Students Smart & Intelligent</h2>
+                    <p class="section-description">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia explicabo maiores consectetur sequi expedita dolore ut qui repudiandae quisquam nulla quibusdam sit ullam voluptatibus consequuntur numquam dignissimos ipsa, voluptatem ad.
+                        Voluptates quam vel pariatur quis magni ab modi nisi nobis impedit beatae? Nemo voluptatum fugit velit. Voluptatibus deserunt voluptatem, facilis fuga id eius, aliquam, sequi maxime aspernatur nulla sed officiis.
+                    </p>
+                    <button class="cta-button">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+     <div class="shadow"></div>
+    <section id="contact">
+        <div class="container">
+            <h1 style="text-align: center;"> Contact Us</h1>
+            <br>
+            <br>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="input-boxes">
+                
+                        <input type="text" placeholder="Your Name">
+                        <br>
+                        <input type="email" placeholder="Your Email">
+                        <br>
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Enter Meassage"></textarea>
+                        <br>
+                        <button type="button" class="cta-button">Submit</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/contact-us-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--phone-telephone-communication-copywriting-pack-marketing-branding-illustrations-4568180.png?f=webp"  class="img-fluid" id="ani-img">
+                </div>
+              
+
+            </div>
+           
+        </div>
+    </section>
+  <br>
+  <br>
+    <footer>
+        <br>
+        <p>Developed By @MMHSS</p>
+    </footer>
+</body>
+</html>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    body{
+        width:100%;
+        height: 100vh;
+        animation: ani 1s  linear;
+        
+}
+::-webkit-scrollbar{
+    display: none;
+}
+@keyframes ani {
+    0%{
+        opacity: 0.5;
+        transition: 0.5s;
+    }
+    100%{
+        opacity: 1;
+        transition: 0.5s;
+    }
+    
+}
+
+nav{
+    width:100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+nav .links ul li{
+    display: inline-block;
+    
+}
+nav .logo{
+    margin-left:30px ;
+}
+nav .logo a{
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 20px;
+    color:#000000;
+}
+nav .logo a span{
+    color:#ee7752
+}
+nav .links{
+    margin-right: 150px;
+}
+nav .links ul li a{
+    text-decoration: none;
+    margin: 20px;
+    color:rgb(0, 0, 0);
+    font-weight: 900;
+}
+nav .links ul li a:hover{
+    border-bottom: 1px solid #29f;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius:2px;
+    transition: 0.6s;
+}
+nav .links #main {
+    padding: 12px 24px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+}
+.main{
+    padding: 12px 24px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+}
+.main:hover{
+    background-color: #1b690b;
+}
+
+nav .links #main:hover {
+    background-color: #2a2a2a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+nav .links #main:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+#home .main-text{
+    margin-top: 10em;
+}
+
+#home .main-text h1{
+    
+    font-size: 50px;
+    letter-spacing: 0.3px;
+   
+}
+
+#home img{
+    z-index: -100;
+    position: relative
+}
+#home .main-text span{
+    color:blue;
+    font-weight: 900;
+}
+#home .main-text p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+
+.about {
+    padding: 80px 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #3498db;
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #34495e;
+    font-weight: 600;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #555;
+}
+.shadow{
+    width:100%;
+    height: 1px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button {
+    display: block;
+    margin:auto;
+    padding: 12px 30px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.cta-button:hover {
+    background: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+
+.about {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+    .section-subtitle {
+        font-size: 1.4rem;
+    }
+    .section-description {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+}
+
+.input-boxes{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-boxes input{
+   border:none;
+   padding:10px 10px 10px;
+   border:1px solid black;
+}
+.input-boxes textarea{
+   border:none;
+   padding:10px 10px 10px;
+   border:1px solid black;
+}
+#contact{
+   margin-top: 4em;
+}
+
+#ani-img{
+    transition: 0.5s;
+}
+
+
+
+#ani-img:hover{
+    transform: translate(10px , -10px);
+    transition: 0.5s;
+}
+
+footer {
+    text-align: center;
+    font-size: 15px;
+    margin: 30px;
+    padding:10px 10px 10px;
+    background-color: #1a1a1a;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+
+}
+
+footer p{
+    color:#fff;
+}
+
+
+
+</style>
