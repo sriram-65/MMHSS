@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI English Learning Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.2.12/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    nav {
+      background-color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo a {
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .logo span {
+      color: #ee7752;
+    }
+
+    .main-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .chat-container {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      margin-bottom: 30px;
+      min-height: 400px;
+    }
+
+    .chat-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .chat-header h2 {
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .chat-header p {
+      color: #6c757d;
+    }
+
+    .conversation-history {
+      max-height: 500px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      padding-right: 10px;
+    }
+
+    .message {
+      margin-bottom: 20px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-message {
+      background-color: #e3f2fd;
+      border-radius: 18px 18px 4px 18px;
+      padding: 12px 16px;
+      margin-left: 20%;
+      border: 1px solid #bbdefb;
+    }
+
+    .ai-message {
+      background-color: #f8f9fa;
+      border-radius: 18px 18px 18px 4px;
+      padding: 12px 16px;
+      margin-right: 20%;
+      border-left: 4px solid #007bff;
+      position: relative;
+    }
+
+    .ai-message pre {
+      background-color: #f6f8fa;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    .ai-message code {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #f6f8fa;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .ai-message table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 12px 0;
+    }
+
+    .ai-message table th, .ai-message table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    .ai-message table th {
+      background-color: #f2f2f2;
+    }
+
+    .ai-message blockquote {
+      border-left: 4px solid #007bff;
+      padding-left: 12px;
+      margin: 12px 0;
+      color: #555;
+    }
+
+    .typing-indicator {
+      display: flex;
+      padding: 12px 16px;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #6c757d;
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    .input-group {
+      margin-top: 20px;
+    }
+
+    .form-control {
+      border-radius: 30px;
+      padding: 12px 20px;
+      border: 1px solid #ced4da;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 40px 0;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin-bottom: 20px;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 20px;
+      margin: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        margin: 20px auto;
+      }
+      
+      nav {
+        padding: 1rem;
+      }
+      
+      .chat-container {
+        padding: 20px;
+      }
+
+      .user-message {
+        margin-left: 10%;
+      }
+
+      .ai-message {
+        margin-right: 10%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <a href="/">MM<span>HSS</span></a>
+    </div>
+    <div class="links">
+      <ul>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <a href="/" class="back-btn">
+      <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+    
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>English Learning Assistant</h2>
+        <p>Ask me anything about English grammar, vocabulary, or writing!</p>
+      </div>
+      
+      <div class="conversation-history" id="conversation">
+        {% if msg %}
+         
+          <div class="message ai-message" id="ai-response">
+            {{msg}}
+          </div>
+          
+        {% else %}
+          <div class="message ai-message">
+            <p>Hello! I'm your English learning assistant. You can ask me about:</p>
+            <ul>
+              <li>Grammar rules and explanations</li>
+              <li>Vocabulary definitions and usage</li>
+              <li>Writing tips and techniques</li>
+              <li>Pronunciation guidance</li>
+              <li>Practice exercises</li>
+            </ul>
+            <p>Type your question below to get started!</p>
+          </div>
+        {% endif %}
+      </div>
+      
+      <form action="/english" method="POST" id="question-form">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Enter your English question..." name="q" required id="question-input">
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            <i class="bi bi-send-fill"></i> Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <h5>MMHSS AI Learning Portal</h5>
+      <p>Made with ❤️ for students to learn faster and better</p>
+  
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+  
+      <div class="social-icons">
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-twitter-x"></i></a>
+      </div>
+  
+      <p class="mb-0">&copy; 2025 MMHSS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  
+</body>
+</html>
