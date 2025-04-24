@@ -1,9 +1,11 @@
 ## CopyRight @ Muthu Theaver Mukulatore Higher Secondar School (2025)
 
-from flask import Flask, render_template, request, redirect, flash, session 
+from flask import Flask, render_template, request, redirect, flash, session  , url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
 import google.generativeai as genai
+from bson.objectid import ObjectId
+from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = "1324sriram"
@@ -13,9 +15,13 @@ client = MongoClient("mongodb+srv://sriram65raja:1324sriram@cluster0.lhsvjbx.mon
 mmhss = client["mmhss"]
 Student_Register = mmhss["Student_Register"]
 
+app.permanent_session_lifetime = timedelta(365)
+
 
 genai.configure(api_key="AIzaSyAvyLEzkIaibw5BFF4ZCISLljZNbLKd2Cg")
 model = genai.GenerativeModel("gemini-2.0-flash")
+chat = model.start_chat(history=[])
+
 
 @app.route("/")
 def home():
@@ -39,8 +45,6 @@ def sign():
             flash("Email ID already exists.")
             return render_template("sign-in.html" ,err="Email ID already exists.")
         
-        
-
         hashed_pw = generate_password_hash(password)
         data = {
             "username": username,
@@ -75,6 +79,7 @@ def login():
 
         session["id"] = str(user["_id"])
         session["email"] = user["email"]
+        session.permanent = True
         flash("User Logged in Successfully")
         return redirect("/dash")
                 
@@ -84,26 +89,44 @@ def login():
 def dash():
     if not session.get("email") and not session.get("id"):
         return redirect("/sign-in")
-
-    
     users = session.get("email")
     name = users.split("@")[0] if users else "NOT _ STUDENT"
     return render_template("dash.html", username=name)
 
-@app.route("/english" , methods=["POST" , "GET"])
+
+@app.route("/english", methods=["GET", "POST"])
 def eng():
+    if "chat_history" not in session:
+        session["chat_history"] = []
 
     if request.method == "POST":
-            txt = request.form.get("q")
-            res = model.generate_content(f"  {txt}  NOTE : Only respond for English Grammer , Questions Only ! if the user asks any another content then simply say iam only for English AI")
-            return render_template("eng.html" , msg = res.text)
-    
-    return render_template("eng.html")
+        txt = request.form.get("q")
+        response = chat.send_message(txt)
+
+      
+        session["chat_history"].append({"role": "user", "content": txt})
+        session["chat_history"].append({"role": "ai", "content": response.text})
+        session.modified = True  
+
+        return redirect(url_for("eng"))  
+
+    return render_template("eng.html", chats=session["chat_history"])
+
+
+
+@app.route("/get-student-details")
+def get_student_info():
+    Students = Student_Register.find_one({"_id":ObjectId(session.get("id"))})
+    get_histry = session.get("chat_history")
+    return render_template("student_info.html" , st_info = Students , username = Students["username"] , gh = get_histry)
+
+
 
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
 
-if __name__ == "__main__":
+if __name__== "__main__":
     app.run(debug=True)
+
