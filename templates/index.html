@@ -27,7 +27,9 @@
         </div>
 
         <div class="bar">
-            <button class="bar" id="click-btn"><i class="fa-solid fa-bars-staggered" id="ibar"></i></button>
+            <button class="bar" id="click-btn">
+                <span id="ibar"><i class="fa-solid fa-bars-staggered"></i></span>
+            </button>
         </div>
 
         <div class="mobile" id="mobile">
@@ -54,7 +56,7 @@
                 
                 </div>
                 <div class="col-md-6">
-                    <img src="https://img.freepik.com/free-psd/3d-nft-icon-digital-artist-male_629802-8.jpg" class="img-fluid" alt="Don't Give Up">
+                    <img src="https://cdn.dribbble.com/userupload/35243014/file/original-51c72acb1d01992bca0d6883a19d3550.gif" class="img-fluid" alt="Don't Give Up">
                 </div>
             </div>
         </div>
@@ -97,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/contact-us-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--phone-telephone-communication-copywriting-pack-marketing-branding-illustrations-4568180.png?f=webp"  class="img-fluid" id="ani-img">
+                    <img src="https://assets-v2.lottiefiles.com/a/e84e8ee6-1170-11ee-9647-d3729348d81a/WnrwQzHsg9.gif"  class="img-fluid" id="ani-img">
                 </div>
               
 
@@ -223,8 +225,8 @@ nav .links #main:active {
 
 
 
-#home .main-text{
-    margin-top: 14em;
+#home .main-text {
+    margin-top: 10em;
 }
 
 #home .main-text h1{
@@ -236,7 +238,10 @@ nav .links #main:active {
 
 #home img{
     z-index: -100;
-    position: relative
+    position: relative;
+    margin-top:30px;
+   
+   
 }
 #home .main-text span{
     color:blue;
@@ -352,19 +357,20 @@ nav .links #main:active {
         display: block;
         width:100%;
         height: 100vh;
-        margin-top:30px;
+        margin-top:40px;
         backdrop-filter: blur(20px);
         position: fixed;
-        top:-66em;
-        transition: 0.5s;
-        
+        left:-66em;
+        transition: 0.6s;
     }
-
     .mobile li {
         list-style: none;
         margin:5em;
-        
-        
+         
+    }
+    nav{
+        width:100%;
+        height: 65px;
     }
     .mobile li a{
         text-decoration: none;
@@ -448,15 +454,15 @@ footer p{
 
 <script>
     let bar = document.getElementById("click-btn")
-    document.getElementById("mobile").style.top="-66em"
+    document.getElementById("mobile").style.left="-66em"
     bar.onclick = function(){
-        if (document.getElementById("mobile").style.top=="-66em"){
-            document.getElementById("mobile").style.top="0em"
-            
-            
-        }
+        if (document.getElementById("mobile").style.left=="-66em"){
+             document.getElementById("mobile").style.left="0em"
+             document.getElementById("ibar").innerHTML = `<i class="fa-solid fa-xmark"></i>`
+        } 
         else{
-            document.getElementById("mobile").style.top="-66em"
+            document.getElementById("mobile").style.left="-66em"
+            document.getElementById("ibar").innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`
             
             
         }
