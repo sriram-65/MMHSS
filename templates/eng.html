@@ -239,6 +239,10 @@
       margin-bottom: 20px;
     }
 
+    nav .li{
+      list-style:none;
+    }
+
     .social-icons a {
       color: white;
       font-size: 20px;
@@ -256,6 +260,9 @@
       
       .chat-container {
         padding: 20px;
+      }
+      nav .li{
+        list-style:none;
       }
 
       .user-message {
@@ -285,33 +292,28 @@
       <i class="bi bi-arrow-left"></i> Back to Dashboard
     </a>
     
-    <div class="chat-container">
-      <div class="chat-header">
-        <h2>English Learning Assistant</h2>
-        <p>Ask me anything about English grammar, vocabulary, or writing!</p>
-      </div>
-      
-      <div class="conversation-history" id="conversation">
-        {% if msg %}
-         
-          <div class="message ai-message" id="ai-response">
-            {{msg}}
+    <div class="conversation-history" id="conversation">
+      {% if chats %}
+        {% for chat in chats %}
+          <div class="message {{ 'user-message' if chat.role == 'user' else 'ai-message' }}">
+            {{ chat.content }}
           </div>
-          
-        {% else %}
-          <div class="message ai-message">
-            <p>Hello! I'm your English learning assistant. You can ask me about:</p>
-            <ul>
-              <li>Grammar rules and explanations</li>
-              <li>Vocabulary definitions and usage</li>
-              <li>Writing tips and techniques</li>
-              <li>Pronunciation guidance</li>
-              <li>Practice exercises</li>
-            </ul>
-            <p>Type your question below to get started!</p>
-          </div>
-        {% endif %}
-      </div>
+        {% endfor %}
+      {% else %}
+        <div class="message ai-message">
+          <p>Hello! I'm your English learning assistant. You can ask me about:</p>
+          <ul>
+            <li>Grammar rules and explanations</li>
+            <li>Vocabulary definitions and usage</li>
+            <li>Writing tips and techniques</li>
+            <li>Pronunciation guidance</li>
+            <li>Practice exercises</li>
+          </ul>
+          <p>Type your question below to get started!</p>
+        </div>
+      {% endif %}
+    </div>
+    
       
       <form action="/english" method="POST" id="question-form">
         <div class="input-group">
