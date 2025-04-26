@@ -59,10 +59,8 @@
         padding:10px 10px;
     }
 </style>
-
 <script>
-  
-    function handle() {
+    function handleSelection() {
         let suggest = window.getSelection().toString().trim();
         if (!suggest) return;
         
@@ -82,14 +80,10 @@
                 document.getElementById("chage").appendChild(ul);
             })
             .catch(e => console.log(e));
-    };
+    }
 
-    
     const desElement = document.getElementById("des");
     
-    desElement.addEventListener("mouseup", handle);
-    desElement.addEventListener("touchend", handle)
-    
-    
-
+    desElement.addEventListener("mouseup", handleSelection);
+    desElement.addEventListener("touchend", handleSelection); // <-- this line fixes mobile
 </script>
