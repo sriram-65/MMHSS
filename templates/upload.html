@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Notes</title>
+</head>
+<body>
+
+    <div class="notes-container">
+        <a href="/take-notes" style="text-align: center;">back To Home</a>
+        <br>
+        <div class="container">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="input-area">
+                
+               
+                <input type="text" placeholder="Enter Your Title" name="title" required>
+                <br>
+                <textarea name="des" id="des" cols="30" placeholder="Enter Your Description" required></textarea>
+                <br>
+                <button class="btn btn-dark">Upload Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+<style>
+    .notes-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+        background: #f9f9f9;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    
+    .container {
+        max-width: 500px;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        padding: 30px;
+    }
+    
+    .input-area {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .input-area input,
+    .input-area textarea {
+        padding: 12px 15px;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        font-size: 16px;
+        outline: none;
+        transition: border 0.3s;
+    }
+    
+    .input-area input:focus,
+    .input-area textarea:focus {
+        border-color: #000;
+    }
+    
+    .input-area textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    
+    .btn-dark {
+        background-color: #333;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .btn-dark:hover {
+        background-color: #555;
+    }
+    
+</style>
