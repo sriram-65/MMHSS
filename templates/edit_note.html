@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Note</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-5">
+    <div class="container">
+        <h2 class="mb-4">Edit Note</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title"  class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="des" rows="5" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a href="/take-notes" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
+
