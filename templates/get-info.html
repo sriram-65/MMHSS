@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Q&A with AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #f8f9fc;
+            --accent-color: #2e59d9;
+            --text-color: #5a5c69;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .upload-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            background: white;
+        }
+        
+        .upload-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .result-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background: white;
+            height: 100%;
+        }
+        
+        .form-control, .form-control:focus {
+            border-radius: 10px;
+            border: 1px solid #d1d3e2;
+            padding: 0.75rem 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .file-upload-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .answer-section {
+            min-height: 300px;
+        }
+        
+        .answer-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #a1a1a1;
+        }
+        
+        .answer-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #d1d3e2;
+        }
+        
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            color: #f8f9fc;
+            transform: translateX(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="display-5 fw-bold mb-0">MMHSS Q&A with AI</h1>
+                <a href="/" class="back-btn">
+                    <i class="fas fa-arrow-left me-2"></i> Back to Home
+                </a>
+            </div>
+            <p class="lead mt-2">Upload your PDF and get instant answers from AI</p>
+        </div>
+    </div>
+
+    
+
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="upload-card p-4 h-100">
+                    <h3 class="mb-4"><i class="fas fa-upload me-2"></i> Upload & Question</h3>
+                    <form method="POST" action="/get-book-sol" enctype="multipart/form-data">
+                        <div class="file-upload-wrapper">
+                            <label for="PDF" class="file-upload-label">Choose PDF File</label>
+                            <input type="file" name="PDF" id="PDF" class="form-control" accept="application/pdf" required>
+                            <small class="text-muted">Max file size: 10MB</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="q" class="form-label fw-bold">Your Question</label>
+                            <textarea name="q" id="q" class="form-control" rows="5" 
+                                      placeholder="Type your question here..." required></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-search me-2"></i> Get Answer
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="result-card p-4">
+                    <h3 class="mb-4"><i class="fas fa-robot me-2"></i> AI Response</h3>
+                    <div class="answer-section">
+                        {% if answer %}
+                            <div class="question-answer">
+                                <div class="question mb-4 p-3 bg-light rounded">
+                                    <h5 class="fw-bold">Question:</h5>
+                                    <p class="mb-0">{{ question }}</p>
+                                </div>
+                                <div class="answer p-3 bg-white border rounded">
+                                    <h5 class="fw-bold">Answer:</h5>
+                                    <p class="mb-0">{{ answer }}</p>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="answer-placeholder text-center py-5">
+                                <i class="fas fa-comment-dots"></i>
+                                <h4 class="mb-2">AI Response Will Appear Here</h4>
+                                <p class="text-muted">Upload a PDF and ask your question to get started</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-5 py-4 text-center text-muted">
+        <div class="container">
+            <p class="mb-0">© 2025 Muthu Theaver Mukulatore with AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add file name display when file is selected
+        document.getElementById('PDF').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file selected';
+            const label = document.querySelector('.file-upload-label');
+            label.innerHTML = `Selected: <strong>${fileName}</strong>`;
+        });
+    </script>
+</body>
+</html>
