@@ -62,7 +62,7 @@
 
 <script>
   
-    function handle () {
+    function handle() {
         let suggest = window.getSelection().toString().trim();
         if (!suggest) return;
         
@@ -87,8 +87,8 @@
     
     const desElement = document.getElementById("des");
     
-    desElement.addEventListener("mouseup", handleSelection);
-    desElement.addEventListener("touchend", handleSelection)
+    desElement.addEventListener("mouseup", handle);
+    desElement.addEventListener("touchend", handle)
     
     
 
