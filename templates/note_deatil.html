@@ -62,7 +62,7 @@
 
 <script>
   
-    document.getElementById("des").onmouseup = function () {
+    function handle () {
         let suggest = window.getSelection().toString().trim();
         if (!suggest) return;
         
@@ -83,6 +83,12 @@
             })
             .catch(e => console.log(e));
     };
+
+    
+    const desElement = document.getElementById("des");
+    
+    desElement.addEventListener("mouseup", handleSelection);
+    desElement.addEventListener("touchend", handleSelection)
     
     
 
